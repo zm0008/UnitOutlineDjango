@@ -1,9 +1,25 @@
 <html>
-<head><title>{{ title }}</title></head>
+<head><title>Teachers</title></head>
 
 <body>
 
-<strong>{{ message }}</strong>{{ content }}
+<strong>Teachers</strong>
 
+    {% if content %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Teaching Area</th>
+        </tr>
+        {% for teach in content %}
+        <tr>
+            <td>{{ teach.Name }}</td>
+            <td>{{ teach.Area }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <strong>No data!!</strong>
+    {% endif %}
 </body>
 </html>
