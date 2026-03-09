@@ -36,6 +36,12 @@
     <Compile Include="InClassDjango\wsgi.py" />
     <Compile Include="MyApp\admin.py" />
     <Compile Include="MyApp\apps.py" />
+    <Compile Include="MyApp\management\commands\importCSV.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyApp\management\commands\removeDuplicates.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyApp\migrations\__init__.py" />
     <Compile Include="MyApp\models.py" />
     <Compile Include="MyApp\tests.py" />
@@ -49,7 +55,9 @@
   <ItemGroup>
     <Folder Include="InClassDjango\" />
     <Folder Include="MyApp\" />
+    <Folder Include="MyApp\management\commands\" />
     <Folder Include="MyApp\migrations\" />
+    <Folder Include="MyApp\management\" />
     <Folder Include="MyApp\templates\" />
     <Folder Include="MyApp\templates\MyApp\" />
   </ItemGroup>
