@@ -19,20 +19,18 @@
     <h3>Scaling Group</h3>
     <p>{{ scaling_group }}</p>
 
-    <h3>Units</h3>
+    <h3>Units and Assessments</h3>
+    {% for u in units %}
+    <h4>{{ u.Name }}</h4>
+    {% if u.assessment_set.all %}
     <ul>
-        {% for u in units %}
-        <li>{{ u.Name }}</li>
-        {% endfor %}
-    </ul>
-
-    <h3>Assessments</h3>
-    <ul>
-        {% for a in assessments %}
+        {% for a in u.assessment_set.all %}
         <li>{{ a.Name }} ({{ a.StartDate }} → {{ a.DueDate }})</li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p>No assessments for this unit.</p>
+    {% endif %}
+    {% endfor %}
 
     {% endif %}
-</body>
-</html>
