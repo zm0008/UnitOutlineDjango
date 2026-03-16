@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Course Viewer</title>
+</head>
+<body>
+    <h2>Select Course</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="View Course">
+    </form>
+
+    {% if course %}
+
+    <h3>Scaling Group</h3>
+    <p>{{ scaling_group }}</p>
+
+    <h3>Units</h3>
+    <ul>
+        {% for u in units %}
+        <li>{{ u.Name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Assessments</h3>
+    <ul>
+        {% for a in assessments %}
+        <li>{{ a.Name }} ({{ a.StartDate }} → {{ a.DueDate }})</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+</body>
+</html>

@@ -53,6 +53,7 @@
     <Compile Include="UnitOutlineDjango\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\templates\MyApp\course.html" />
     <Content Include="MyApp\templates\MyApp\input.html" />
     <Content Include="MyApp\templates\MyApp\index.html" />
     <Content Include="requirements.txt" />
