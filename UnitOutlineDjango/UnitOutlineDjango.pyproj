@@ -3,7 +3,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>UnitOutlineDjango</Name>
     <RootNamespace>UnitOutlineDjango</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.10</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.14</InterpreterId>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,6 +33,9 @@
     <Compile Include="manage.py" />
     <Compile Include="MyApp\admin.py" />
     <Compile Include="MyApp\apps.py" />
+    <Compile Include="MyApp\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyApp\management\commands\importCSV.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +53,7 @@
     <Compile Include="UnitOutlineDjango\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\templates\MyApp\input.html" />
     <Content Include="MyApp\templates\MyApp\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
@@ -63,7 +67,7 @@
     <Folder Include="UnitOutlineDjango\" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.10" />
+    <InterpreterReference Include="Global|PythonCore|3.14" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
