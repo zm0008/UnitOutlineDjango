@@ -27,6 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', MyApp.views.index, name='index'),
     re_path(r'^home$', MyApp.views.index, name='home'),
-    re_path(r'input', MyApp.views.input_view, name='input'),
-    re_path(r'course', MyApp.views.course_view, name='course')
+    path('input/', MyApp.views.input_view, name='input'),
+    path('courseinput/', MyApp.views.inputcourse_view, name='courseinput'),
+    path('unitinput/', MyApp.views.inputunit_view, name='unitinput'),
+    path('assessmentinput/', MyApp.views.inputassessment_view, name='assessmentinput'),
+    path('course/', MyApp.views.course_view, name='course')
 ]

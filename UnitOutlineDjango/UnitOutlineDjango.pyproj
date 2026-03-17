@@ -53,9 +53,13 @@
     <Compile Include="UnitOutlineDjango\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\templates\MyApp\assessmentinput.html" />
     <Content Include="MyApp\templates\MyApp\course.html" />
+    <Content Include="MyApp\templates\MyApp\courseinput.html" />
     <Content Include="MyApp\templates\MyApp\input.html" />
     <Content Include="MyApp\templates\MyApp\index.html" />
+    <Content Include="MyApp\templates\MyApp\scalinggroupinput.html" />
+    <Content Include="MyApp\templates\MyApp\unitinput.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

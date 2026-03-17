@@ -1,12 +1,7 @@
 from django.db import models
 
 # Create your models here.a
-class teacher(models.Model):
-    Name = models.CharField(max_length=25)
-    Area = models.CharField(max_length=30)
 
-    def __str__(self):
-        return self.Name
 
 class scalinggroup(models.Model):
     Name = models.IntegerField()
@@ -14,6 +9,14 @@ class scalinggroup(models.Model):
 class course(models.Model):
     Name = models.CharField(max_length=20)
     ScalingGroup = models.ForeignKey(scalinggroup, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.Name
+
+class teacher(models.Model):
+    Name = models.CharField(max_length=25)
+    Area = models.CharField(max_length=30)
+    Courses = models.ManyToManyField(course, blank=True)
 
     def __str__(self):
         return self.Name
