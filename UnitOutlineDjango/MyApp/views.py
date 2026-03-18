@@ -75,9 +75,7 @@ def course_view(request):
 
         if form.is_valid():
             selected_course = form.cleaned_data["course"]
-
             units = unit.objects.filter(Course=selected_course)
-            assessments = assessment.objects.filter(Unit__Course=selected_course)
             scaling_group = selected_course.ScalingGroup
     else:
         form = CourseForm()
