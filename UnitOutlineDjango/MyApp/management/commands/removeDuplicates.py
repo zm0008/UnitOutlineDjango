@@ -2,7 +2,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.models import Min
-from MyApp1.models import teacher
+from MyApp.models import teacher
 
 class Command(BaseCommand):
     help = "This is some help text"
