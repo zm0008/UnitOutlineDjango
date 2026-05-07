@@ -53,6 +53,7 @@
     <Compile Include="UnitOutlineDjango\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\static\images\ACTGov2.png" />
     <Content Include="MyApp\templates\MyApp\assessmentinput.html" />
     <Content Include="MyApp\templates\MyApp\course.html" />
     <Content Include="MyApp\templates\MyApp\courseinput.html" />
@@ -67,8 +68,11 @@
     <Folder Include="MyApp\management\commands\" />
     <Folder Include="MyApp\migrations\" />
     <Folder Include="MyApp\management\" />
+    <Folder Include="MyApp\static\" />
+    <Folder Include="MyApp\static\images\" />
     <Folder Include="MyApp\templates\" />
     <Folder Include="MyApp\templates\MyApp\" />
+    <Folder Include="static\" />
     <Folder Include="UnitOutlineDjango\" />
   </ItemGroup>
   <ItemGroup>

@@ -31,5 +31,6 @@ urlpatterns = [
     path('courseinput/', MyApp.views.inputcourse_view, name='courseinput'),
     path('unitinput/', MyApp.views.inputunit_view, name='unitinput'),
     path('assessmentinput/', MyApp.views.inputassessment_view, name='assessmentinput'),
-    path('course/', MyApp.views.course_view, name='course')
+    path('course/', MyApp.views.course_view, name='course'),
+    path('report/', MyApp.views.report, name='report')
 ]
