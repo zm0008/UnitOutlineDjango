@@ -1,6 +1,6 @@
 from logging import raiseExceptions
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 from .models import teacher
 from .forms import InputForm
@@ -15,6 +15,12 @@ from reportlab.platypus import Table
 from django.http import FileResponse
 from django.contrib.staticfiles.storage import staticfiles_storage
 from io import BytesIO
+from django.shortcuts import render
+from .forms import UploadFileForm
+
+# Imaginary function to handle an uploaded file.
+#from somewhere import handle_uploaded_file
+
 
 # Create your views here.
 def index(request):
@@ -116,24 +122,29 @@ def generate_pdf():
     buffer.seek(0)
     return buffer
 
-def report(request):
-    pdf_file = staticfiles_storage.path("DS.pdf")
+def upload_file(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            pdf_file = request.FILES.get("file")
+            merger = PdfWriter()
+            input1 = PdfReader(generate_pdf())
 
-    try:
-        merger = PdfWriter()
+            try:
+                merger.append(input1)
+                if pdf_file:
+                    input2 = PdfReader(pdf_file, "rb")
+                    merger.append(input2)
+                buffer = BytesIO()
+                merger.write(buffer)
+                buffer.seek(0)
+                response = FileResponse(buffer, as_attachment=True, filename="Attachment.pdf")
 
-        input1 = PdfReader(generate_pdf())
-        input2 = PdfReader(pdf_file, "rb")
-
-        merger.append(input1)
-        merger.append(input2)
-
-        buffer = BytesIO()
-        merger.write(buffer)
-        buffer.seek(0)
-        response = FileResponse(buffer, as_attachment=True, filename="Attachment.pdf")
-
-
-    except FileNotFoundError:
-        response = FileResponse(generate_pdf(), as_attachment=True, filename="noAttachment.pdf")
-    return response
+            except FileNotFoundError:
+                response = FileResponse(generate_pdf(), as_attachment=True, filename="noAttachment.pdf")
+            return response
+            
+            #return HttpResponseRedirect("/success/url/")
+    else:
+        form = UploadFileForm()
+    return render(request, "MyApp/upload.html", {"form": form})

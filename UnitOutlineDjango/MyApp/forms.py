@@ -32,4 +32,6 @@ class InputFormScalingGroup(forms.ModelForm):
 
 class CourseForm(forms.Form):
     course = forms.ModelChoiceField(queryset=course.objects.all(), label="Select Course")
-    #
+    
+class UploadFileForm(forms.Form):
+    file = forms.FileField(required=False)

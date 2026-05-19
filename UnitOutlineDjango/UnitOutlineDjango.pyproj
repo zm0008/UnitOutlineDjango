@@ -61,6 +61,7 @@
     <Content Include="MyApp\templates\MyApp\index.html" />
     <Content Include="MyApp\templates\MyApp\scalinggroupinput.html" />
     <Content Include="MyApp\templates\MyApp\unitinput.html" />
+    <Content Include="MyApp\templates\MyApp\upload.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

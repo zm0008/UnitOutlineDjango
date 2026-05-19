@@ -17,42 +17,43 @@
             flex-direction: row;
             background-color: #f0f3f5;
         }
+
         .navbarlist {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: #f0f3f5;
-         
         }
 
-        .navbarlist li {
-            float: left;
-        }
+            .navbarlist li {
+                float: left;
+            }
 
-        .navbarlist li a {
-            display: block;
-            color: black;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
+                .navbarlist li a {
+                    display: block;
+                    color: black;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
 
-        .navbarlist li a:hover {
-            background-color: #cbcfd1;
-
-        }
+                    .navbarlist li a:hover {
+                        background-color: #cbcfd1;
+                    }
     </style>
     <div class="navbar">
-        <div><a class="navbar-brand" href="#"><img src="{% static 'images/ACTGov2.png' %}" alt='ACT GOV LOGO' style="width: 50%; height: auto;"/></a></div>
-        <div><ul class="navbarlist">
-            <!-- Change ts to some real links-->
+        <div><a class="navbar-brand" href="#"><img src="{% static 'images/ACTGov2.png' %}" alt='ACT GOV LOGO' style="width: 50%; height: auto;" /></a></div>
+        <div>
+            <ul class="navbarlist">
+                <!-- Change ts to some real links-->
 
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="#Unit_Outline_Generator">Unit Outline Generator</a></li>
-            <li><a href="#Results">Results</a></li>
-            <li><a href="#Academic_Record">Academic Record</a></li>
-        </ul></div>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="#Unit_Outline_Generator">Unit Outline Generator</a></li>
+                <li><a href="#Results">Results</a></li>
+                <li><a href="#Academic_Record">Academic Record</a></li>
+            </ul>
+        </div>
     </div>
     <strong>Teachers</strong>
 
@@ -74,8 +75,9 @@
     {% endif %}
     <a href="{% url 'input' %}">Add New Teacher</a>
     <a href="{% url 'course' %}">View Courses</a>
+    <!--<p><a href="{ url 'report' }">Download PDF</a></p>-->
 
-    <p><a href="{% url 'report' %}">Download PDF</a></p>
+    <a href="{% url 'upload_file' %}">Upload File</a>
 
 </body>
 </html>
