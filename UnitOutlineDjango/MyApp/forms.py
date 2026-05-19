@@ -32,4 +32,3 @@ class InputFormScalingGroup(forms.ModelForm):
 
 class CourseForm(forms.Form):
     course = forms.ModelChoiceField(queryset=course.objects.all(), label="Select Course")
-    #Test Commit
