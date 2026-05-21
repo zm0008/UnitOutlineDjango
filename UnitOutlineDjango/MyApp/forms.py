@@ -35,3 +35,4 @@ class CourseForm(forms.Form):
     
 class UploadFileForm(forms.Form):
     file = forms.FileField(required=False)
+    selection = forms.ChoiceField(choices=[])    
