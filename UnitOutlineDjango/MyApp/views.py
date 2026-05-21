@@ -1,6 +1,8 @@
+import gspread
 from logging import raiseExceptions
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 from datetime import datetime
 from .models import teacher
 from .forms import InputForm
@@ -17,6 +19,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from io import BytesIO
 from django.shortcuts import render
 from .forms import UploadFileForm
+from pathlib import Path
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
@@ -102,20 +105,31 @@ def course_view(request):
     }
     return render(request, "MyApp/course.html", context)
 
-def generate_pdf():
+def generate_pdf(data, selected_label):
 
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
 
-    lines = [('Name:', 'Teaching Area:')]
-    teachers = teacher.objects.all()
+    selected_data = None
 
-    for teach in teachers: 
-        lines.append((teach.Name, teach.Area))
+    #gets the correct row based on the users selection
+    for row in data:
+        if len(row) >= 6:
+            label = f"{row[0]} - {row[1]} - {row[2]}"
 
-    table = Table(lines)
-    table.wrapOn(p, 300, 300)
-    table.drawOn(p, 10, 650)
+            if label == selected_label:
+                selected_data = row
+                break
+
+    #puts tetx from columns D, E and F on pdf
+    y = 750
+    if selected_data:
+        p.drawString(50, y, f"Unit Descriptor: {selected_data[3]}")
+        y -= 20
+        p.drawString(50, y, f"Unit Goals: {selected_data[4]}")
+        y -= 20
+        p.drawString(50, y, f"Content Descriptions: {selected_data[5]}")
+
     p.showPage()
     p.save()
 
@@ -123,12 +137,30 @@ def generate_pdf():
     return buffer
 
 def upload_file(request):
+
+    #this the code for accesing the google sheet
+    location = Path(settings.BASE_DIR)/"MyApp"/"service_account.json"
+    gc = gspread.service_account(filename=str(location))
+    sheet = gc.open("BSSS Course Data")
+    data = sheet.sheet1.get("A2:F20")
+
+    #defines the choices for the form, using ABC as label
+    choices = [
+        (f"{row[0]} - {row[1]} - {row[2]}", f"{row[0]} - {row[1]} - {row[2]}")
+        for row in data
+        if len(row) >= 3
+    ]
+
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
+        form.fields["selection"].choices = choices
+
         if form.is_valid():
+            selected_label = form.cleaned_data["selection"]
             pdf_file = request.FILES.get("file")
+            
             merger = PdfWriter()
-            input1 = PdfReader(generate_pdf())
+            input1 = PdfReader(generate_pdf(data, selected_label))
 
             try:
                 merger.append(input1)
@@ -143,8 +175,7 @@ def upload_file(request):
             except FileNotFoundError:
                 response = FileResponse(generate_pdf(), as_attachment=True, filename="noAttachment.pdf")
             return response
-            
-            #return HttpResponseRedirect("/success/url/")
     else:
         form = UploadFileForm()
+        form.fields["selection"].choices = choices  
     return render(request, "MyApp/upload.html", {"form": form})

@@ -53,6 +53,7 @@
     <Compile Include="UnitOutlineDjango\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyApp\service_account.json" />
     <Content Include="MyApp\static\images\ACTGov2.png" />
     <Content Include="MyApp\templates\MyApp\assessmentinput.html" />
     <Content Include="MyApp\templates\MyApp\course.html" />
